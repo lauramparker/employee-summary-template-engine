@@ -58,7 +58,7 @@ const engineerInput = () =>
         {
         type: 'input',
         message: "Enter the employee's GitHub id: ",
-        name: 'engineerOfficeNumber',
+        name: 'engineerGitHub',
         },
 
 const internInput = () =>
@@ -85,9 +85,25 @@ const internInput = () =>
         },
 
 
+return managerInput;
+return engineerInput;
+return internInput;
+
 // and to create objects for each team member (using the correct classes as blueprints!)
 
+//Manager Object
 
+function Manager(name, ID, email, officeNumber) {
+    this.name = ;
+    this.noise = noise;
+    
+  }
+  
+
+const managerInfo = new Manager (${response.managerName}, ${response.managerID}, ${response.managerEmail}, ${response.managerOfficenumber}); //icon?? 
+const engineerInfo = new Engineer (${response.engineerName}, ${response.engineerID}, ${response.engineerEmail}, ${response.engineerGitHub}); 
+const internInfo = new Intern (${response.internName}, ${response.internID}, ${response.internEmail}, ${response.internSchool}); 
+  
 
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
