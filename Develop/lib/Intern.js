@@ -7,6 +7,10 @@ class Intern extends Employee {
       super(employeeName, ID, email);
       
       this.school = school;
+
+      getSchool()
+
+      getRole() //overriden to return Intern
     }
   }
 
