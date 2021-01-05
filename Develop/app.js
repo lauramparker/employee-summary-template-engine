@@ -1,6 +1,7 @@
 const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
+
 const inquirer = require("inquirer");
 const path = require("path");
 const fs = require("fs");
@@ -13,78 +14,36 @@ const render = require("./lib/htmlRenderer");
 
 // Write code to use inquirer to gather information about the development team members,
 
-    //prompt the user to input needed information for README
+    //prompt the user to input needed information for employees
 
-const managerInput = () =>
+const employeeInput = () =>
     inquirer.prompt([
         {
         type: 'input',
         message: "Enter the employee's first and last name: ",
-        name: 'managerName',
+        name: 'employeeName',
         },
         {
         type: 'input',
         message: "Enter the employee's ID: ",
-        name: 'managerID',
+        name: 'employeeID',
         },
         {
         type: 'input',
         message: "Enter the employee's email: ",
-        name: 'managerEmail',
+        name: 'employeeEmail',
         },
         {
         type: 'input',
-        message: "Enter the employee's office number: ",
-        name: 'managerOfficeNumber',
+        message: "What type of employee is this? (Enter M for Manager, E for Engineer, I for Intern)",
+        name: 'employeeType',
         },
-
-const engineerInput = () =>
-    inquirer.prompt([
-        {
-        type: 'input',
-        message: "Enter the employee's first and last name: ",
-        name: 'engineerName',
-        },
-        {
-        type: 'input',
-        message: "Enter the employee's ID: ",
-        name: 'engineerID',
-        },
-        {
-        type: 'input',
-        message: "Enter the employee's email: ",
-        name: 'engineerEmail',
-        },
-        {
-        type: 'input',
-        message: "Enter the employee's GitHub id: ",
-        name: 'engineerGitHub',
-        },
-
-const internInput = () =>
-    inquirer.prompt([
-        {
-        type: 'input',
-        message: "Enter the employee's first and last name: ",
-        name: 'internName',
-        },
-        {
-        type: 'input',
-        message: "Enter the employee's ID: ",
-        name: 'internID',
-        },
-        {
-        type: 'input',
-        message: "Enter the employee's email: ",
-        name: 'internEmail',
-        },
-        {
-        type: 'input',
-        message: "Enter the employee's school: ",
-        name: 'internSchool',
-        },
+    ]).then(input => {
+        return input
+    });
 
 
+return employeeInput;
 return managerInput;
 return engineerInput;
 return internInput;
@@ -92,14 +51,7 @@ return internInput;
 // and to create objects for each team member (using the correct classes as blueprints!)
 
 //Manager Object
-
-function Manager(name, ID, email, officeNumber) {
-    this.name = ;
-    this.noise = noise;
-    
-  }
   
-
 const managerInfo = new Manager (${response.managerName}, ${response.managerID}, ${response.managerEmail}, ${response.managerOfficenumber}); //icon?? 
 const engineerInfo = new Engineer (${response.engineerName}, ${response.engineerID}, ${response.engineerEmail}, ${response.engineerGitHub}); 
 const internInfo = new Intern (${response.internName}, ${response.internID}, ${response.internEmail}, ${response.internSchool}); 
@@ -117,7 +69,7 @@ render
 // Hint: you may need to check if the `output` folder exists and create it if it
 // does not.
 
-// HINT: each employee type (manager, engineer, or intern) has slightly different
+// HINT: each employee type (manager, engineer, or intern) has slightly different0
 // information; write your code to ask different questions via inquirer depending on
 // employee type.
 

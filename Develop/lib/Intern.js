@@ -8,7 +8,17 @@ class Intern extends Employee {
       
       this.school = school;
 
-      getSchool()
+      getSchool() 
+      return inquirer.prompt([
+        {
+          type: 'input',
+          name: 'school',
+          message: "Enter the employee's school: ",
+        
+        //user must input string letters
+        validate: val => /[a-z]/gi.test(val),
+        }
+      ]);
 
       getRole() //overriden to return Intern
     }

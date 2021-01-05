@@ -8,7 +8,17 @@ class Engineer extends Employee {
       
       this.github = github;
 
-      getGithub()
+    getGithub() 
+      return inquirer.prompt([
+        {
+          type: 'input',
+          name: 'github',
+          message: "Enter the employee's github: ",
+        
+        //user must input github
+        validate: val => /[a-z]/gi.test(val),
+        }
+      ]);
 
       getRole() //overriden to return Engineer
     }
