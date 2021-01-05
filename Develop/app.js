@@ -131,30 +131,19 @@ async function startProcess () {
 });  //end async function
 
 
+//initiate and run input process
+startProcess();  //asynch await?
 
-// After the user has input all employees desired, call the `render` function (required
-// above) and pass in an array containing all employee objects;
+// After the user has input all employees desired, call the `render` function and pass in an array containing all employee objects;
 
-render (manager, engineer, intern)
+render (manager, engineer, intern) = () => {
 
-    const mainhtml = fs.readFileSync("templates/main.html");
+    fs.readFileSync("templates/main.html")
+};
 
-// After you have your html, you're now ready to create an HTML file using the HTML
-// returned from the `render` function. Now write it to a file named `team.html` in the
-// `output` folder. You can use the variable `outputPath` above target this location.
+//Now write it to a file named `team.html` in the use the variable `outputPath` above target this location.
+    .then((response) => writeFile('output/team.html', render(response)))
 
-outputpath = fs.writeFile("output/team.html", teamHTML, function(err) {
+    .catch((err) => console.error(err));
 
-        if (err) {
-            return console.logg(err);
-        }
-        console.log("you did it!");
-
-    });
-
-}
-
-
-//initiate and run application
-startProcess();
 
