@@ -4,24 +4,18 @@ const Intern = require("./Employee.js");
 class Intern extends Employee {
     constructor(school) {
   
-      super(employeeName, ID, email);
+      super(name, id, email);
       
       this.school = school;
-
-      getSchool() 
-      return inquirer.prompt([
-        {
-          type: 'input',
-          name: 'school',
-          message: "Enter the employee's school: ",
-        
-        //user must input string letters
-        validate: val => /[a-z]/gi.test(val),
-        }
-      ]);
-
-      getRole() //overriden to return Intern
     }
+
+    getSchool() {
+      return this.school;
+    };
+
+    getRole() { 
+      return "Intern"; //overriden to return Intern
+    };
   }
 
   module.exports = Intern;

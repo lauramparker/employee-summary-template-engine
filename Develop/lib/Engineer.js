@@ -4,24 +4,17 @@ const Engineer = require("./Employee.js");
 class Engineer extends Employee {
     constructor(github) {
   
-      super(employeeName, ID, email);
+      super(name, id, email);
       
       this.github = github;
-
-    getGithub() 
-      return inquirer.prompt([
-        {
-          type: 'input',
-          name: 'github',
-          message: "Enter the employee's github: ",
-        
-        //user must input github
-        validate: val => /[a-z]/gi.test(val),
-        }
-      ]);
-
-      getRole() //overriden to return Engineer
     }
-  }
+
+    getGithub() {
+      return this.github;
+    };
+
+    getRole() {
+        return "Engineer"; //overriden to return Engineer
+    };
 
   module.exports = Engineer;

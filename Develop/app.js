@@ -1,3 +1,4 @@
+const Employee = require("./lib/Employee");
 const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
@@ -12,49 +13,45 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 const render = require("./lib/htmlRenderer");
 
 
-// Write code to use inquirer to gather information about the development team members,
 
-    //prompt the user to input needed information for employees
 
-const employeeInput = () =>
+//prompt the user to input needed information for employees
+employeeInput = () =>
     inquirer.prompt([
         {
         type: 'input',
         message: "Enter the employee's first and last name: ",
-        name: 'employeeName',
+        name: 'name',
         },
         {
         type: 'input',
         message: "Enter the employee's ID: ",
-        name: 'employeeID',
+        name: 'id',
         },
         {
         type: 'input',
         message: "Enter the employee's email: ",
-        name: 'employeeEmail',
+        name: 'email',
         },
         {
         type: 'input',
-        message: "What type of employee is this? (Enter M for Manager, E for Engineer, I for Intern)",
-        name: 'employeeType',
+        message: "What type of employee is this?",
+        name: 'role',
+        choices:  ['Manager', 'Engineer', 'Intern']
         },
-    ]).then(input => {
-        return input
+    ]).then((input) => {
+        const name = input.name;
+        const id = input.id;
+        const email = input.email
+        const role = input.role;
     });
 
 
 return employeeInput;
-return managerInput;
-return engineerInput;
-return internInput;
 
 // and to create objects for each team member (using the correct classes as blueprints!)
 
 //Manager Object
-  
-const managerInfo = new Manager (${response.managerName}, ${response.managerID}, ${response.managerEmail}, ${response.managerOfficenumber}); //icon?? 
-const engineerInfo = new Engineer (${response.engineerName}, ${response.engineerID}, ${response.engineerEmail}, ${response.engineerGitHub}); 
-const internInfo = new Intern (${response.internName}, ${response.internID}, ${response.internEmail}, ${response.internSchool}); 
   
 
 // After the user has input all employees desired, call the `render` function (required
