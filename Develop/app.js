@@ -16,7 +16,7 @@ const Intern = require("./lib/Intern");
 
 //set up number of employees to enter ; set up lop function to got over each employee's info
 startProcess = () =>
-    inquirer.prompt([
+await inquirer.prompt([
         {
         type: 'number',
         message: 'How many employees are on this team?',
@@ -33,49 +33,79 @@ startProcess = () =>
             let role;
 
 
-//prompt the user to input needed information for employees //inside the startProcess function
-employeeInput = () =>
-    inquirer.prompt([
-        {
-        type: 'input',
-        message: "Enter the employee (${i})'s first and last name: ",
-        name: 'name',
-        },
-        {
-        type: 'input',
-        message: "Enter the employee (${i})'s ID: ",
-        name: 'id',
-        },
-        {
-        type: 'input',
-        message: "Enter the employee (${i})'s email: ",
-        name: 'email',
-        },
-        {
-        type: 'input',
-        message: "What type of employee is employee (${i})?",
-        name: 'role',
-        choices:  ['Manager', 'Engineer', 'Intern']
-        },
-    ]).then((input) => {
-        const name = input.name; // need to fix this.... not recognizing
-        const id = input.id;
-        const email = input.email
-        const role = input.role;
-    });
+    //prompt the user to input needed information for employees //inside the startProcess function
+    employeeInput = () =>
+    await inquirer.prompt([
+            {
+            type: 'input',
+            message: "Enter the employee (${i})'s first and last name: ",
+            name: 'name',
+            },
+            {
+            type: 'input',
+            message: "Enter the employee (${i})'s ID: ",
+            name: 'id',
+            },
+            {
+            type: 'input',
+            message: "Enter the employee (${i})'s email: ",
+            name: 'email',
+            },
+            {
+            type: 'input',
+            message: "What type of employee is employee (${i})?",
+            name: 'role',
+            choices:  ['Manager', 'Engineer', 'Intern']
+            },
+        ]).then((input) => {
+            const name = input.name; // need to fix this.... not recognizing
+            const id = input.id;
+            const email = input.email
+            const role = input.role;
+        });
 
 
-return employeeInput;
+    return employeeInput;
 
 });  //what happens if nothing is entered?
 
-if () {  // need if thens for changing to prompts for other classes?
+//promptManager = () =>
+await inquirer.prompt([
+        {
+        type: 'number',
+        message: 'What is the Manager office number?",
+        name: 'officeNumber',
+        },
+    ]).then((input) => {
+        const officeNumber = input.officeNumber;
+
+});
 
 
-} then
+//promptEngineer = () =>
+await inquirer.prompt([
+    {
+    type: 'url',
+    message: 'What is the github for this emplopyee?',
+    name: 'github',
+    },
+]).then((input) => {
+    const github = input.github;
+
+});
 
 
-}
+//promptIntern = () =>
+await inquirer.prompt([
+    {
+    type: 'input',
+    message: 'Enter the intern school:',
+    name: 'school',
+    },
+]).then((input) => {
+    const school = input.school;
+
+});
 
 
 
