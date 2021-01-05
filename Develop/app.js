@@ -1,8 +1,3 @@
-const Employee = require("./lib/Employee");
-const Manager = require("./lib/Manager");
-const Engineer = require("./lib/Engineer");
-const Intern = require("./lib/Intern");
-
 const inquirer = require("inquirer");
 const path = require("path");
 const fs = require("fs");
@@ -12,35 +7,58 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
+//file sources for employee classes
+const Employee = require("./lib/Employee");
+const Manager = require("./lib/Manager");
+const Engineer = require("./lib/Engineer");
+const Intern = require("./lib/Intern");
 
 
+//set up number of employees to enter ; set up lop function to got over each employee's info
+startProcess = () =>
+    inquirer.prompt([
+        {
+        type: 'number',
+        message: 'How many employees are on this team?',
+        name: 'teamNumber',
+        },
+    ]).then((input) => {
+        const teamNumber = input.teamNumber;
 
-//prompt the user to input needed information for employees
+        for (i = 1; i <teamNumber; i++) {
+
+            let name;
+            let id;
+            let email;
+            let role;
+
+
+//prompt the user to input needed information for employees //inside the startProcess function
 employeeInput = () =>
     inquirer.prompt([
         {
         type: 'input',
-        message: "Enter the employee's first and last name: ",
+        message: "Enter the employee (${i})'s first and last name: ",
         name: 'name',
         },
         {
         type: 'input',
-        message: "Enter the employee's ID: ",
+        message: "Enter the employee (${i})'s ID: ",
         name: 'id',
         },
         {
         type: 'input',
-        message: "Enter the employee's email: ",
+        message: "Enter the employee (${i})'s email: ",
         name: 'email',
         },
         {
         type: 'input',
-        message: "What type of employee is this?",
+        message: "What type of employee is employee (${i})?",
         name: 'role',
         choices:  ['Manager', 'Engineer', 'Intern']
         },
     ]).then((input) => {
-        const name = input.name;
+        const name = input.name; // need to fix this.... not recognizing
         const id = input.id;
         const email = input.email
         const role = input.role;
@@ -48,6 +66,21 @@ employeeInput = () =>
 
 
 return employeeInput;
+
+});  //what happens if nothing is entered?
+
+if () {  // need if thens for changing to prompts for other classes?
+
+
+} then
+
+
+}
+
+
+
+
+
 
 // and to create objects for each team member (using the correct classes as blueprints!)
 
