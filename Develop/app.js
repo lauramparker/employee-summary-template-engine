@@ -8,7 +8,7 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 const render = require("./lib/htmlRenderer");
 
 //file sources for employee classes
-const Employee = require("./lib/Employee");
+const Employee = require("./lib/Employee").default;
 const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
@@ -18,49 +18,49 @@ let inputArray = [];
 
 //set up number of employees to enter ; set up lop function to got over each employee's info
 async function startProcess () {
-    console.log("Welcome! Ready to enter your team's Info?");
+    console.log("Welcome!");
 
-    await inquirer.prompt([
-        {
-        type: 'number',
-        message: 'How many employees are on this team?', //what happens if nothing is entered?
-        name: 'teamNumber',
-        },
-    ]).then((input) => {
-        let teamNumber = input.teamNumber;
+    //inquirer.prompt([
+    //     {
+    //     type: 'number',
+    //     message: 'How many employees are on this team?', //what happens if nothing is entered?
+    //     name: 'teamNumber',
+    //     },
+    // ]).then((input) => {
+    //     let teamNumber = input.teamNumber;
 
-        for (i = 1; i <teamNumber; i++) {
-
+    //    for (i = 1; i < teamNumber; i++) {
             let name;
             let id;
             let email;
-            let role;
-
+            let role; 
+               
 
     //prompt the user to input needed information for employees //inside the startProcess function
-  //  employeeInput = () =>
-        inquirer.prompt([
+//   employeeInput = () =>
+  await inquirer.prompt([
+    
             {
             type: 'input',
-            message: "Enter the employee (${i})'s first and last name: ",
+            message: `Enter employee's first and last name: `,
             name: 'name',
             },
             {
             type: 'input',
-            message: "Enter the employee (${i})'s ID: ",
+            message: `Enter employee's ID: `,
             name: 'id',
             },
             {
             type: 'input',
-            message: "Enter the employee (${i})'s email: ",
+            message: `Enter employee's email: `,
             name: 'email',
             },
             {
-            type: 'input',
-            message: "What type of employee is employee (${i})?",
+            type: 'list',
+            message: `What type of employee is this person?`,
             name: 'role',
             choices:  ['Manager', 'Engineer', 'Intern']
-            },
+            }
         ]).then((input) => {
             name = input.name; 
             id = input.id;
@@ -70,13 +70,11 @@ async function startProcess () {
 
 
 
-        //swtich method based on user choice for role type
+        //switch method based on user choice for role type
         //Use if/thens and function names if switch case doesn't work...
         switch (role) {
             case "Manager":
         
-
-                //promptManager = () =>
                  inquirer.prompt([
                         {
                         type: 'number',
@@ -89,12 +87,12 @@ async function startProcess () {
                         manager = new Manager(name, id, email, role, officeNumber); //creates manager object
                         inputArray.push(manager); //pushes single employee data into final employee array
 
+
                 });
                 break;
 
 
             case "Engineer":
-                //promptEngineer = () =>
                  inquirer.prompt([
                         {
                         type: 'url',
@@ -102,7 +100,7 @@ async function startProcess () {
                         name: 'github',
                         },
                     ]).then((input) => {
-                        const github = input.github;
+                        let github = input.github;
 
                         engineer = new Manager(name, id, email, role, github); //creates engineer object
                         inputArray.push(engineer); //pushes single employee data into final employee array
@@ -112,7 +110,6 @@ async function startProcess () {
 
 
             case "Intern":
-                //promptIntern = () =>
                  inquirer.prompt([
                     {
                     type: 'input',
@@ -120,7 +117,7 @@ async function startProcess () {
                     name: 'school',
                     },
                 ]).then((input) => {
-                    const school = input.school;
+                    let school = input.school;
 
                     intern = new Intern(name, id, email, role, school); //creates intern object
                     inputArray.push(intern); //pushes single employee data into final employee array
@@ -130,12 +127,24 @@ async function startProcess () {
 
         } //end switch cases
 
+        inquirer.prompt([
+        {
+            type: 'list',
+            message: 'Do you want to add an employee?',
+            name: 'addEmployee',
+            choices: ['Yes', 'No'],
+            }
+        ]).then(function(answer) {
+            if(answer.addEmployee === 'Yes') {
+                startProcess();
+            }
+        })
 
-    }; //end loop
+//    }; //end loop
 
-});  //end async function
+};  //end async function
 
-};
+
 
 //initiate and run input process
 startProcess();  //asynch await?
