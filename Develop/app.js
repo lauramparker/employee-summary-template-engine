@@ -20,7 +20,7 @@ let inputArray = [];
 async function startProcess () {
     console.log("Welcome! Ready to enter your team's Info?");
 
-    inquirer.prompt([
+    await inquirer.prompt([
         {
         type: 'number',
         message: 'How many employees are on this team?', //what happens if nothing is entered?
@@ -39,7 +39,7 @@ async function startProcess () {
 
     //prompt the user to input needed information for employees //inside the startProcess function
   //  employeeInput = () =>
-    await inquirer.prompt([
+        inquirer.prompt([
             {
             type: 'input',
             message: "Enter the employee (${i})'s first and last name: ",
@@ -77,10 +77,10 @@ async function startProcess () {
         
 
                 //promptManager = () =>
-                await inquirer.prompt([
+                 inquirer.prompt([
                         {
                         type: 'number',
-                        message: 'What is the Manager office number?",
+                        message: 'What is the Manager office number?',
                         name: 'officeNumber',
                         },
                     ]).then((input) => {
@@ -95,7 +95,7 @@ async function startProcess () {
 
             case "Engineer":
                 //promptEngineer = () =>
-                await inquirer.prompt([
+                 inquirer.prompt([
                         {
                         type: 'url',
                         message: 'What is the github for this emplopyee?',
@@ -113,7 +113,7 @@ async function startProcess () {
 
             case "Intern":
                 //promptIntern = () =>
-                await inquirer.prompt([
+                 inquirer.prompt([
                     {
                     type: 'input',
                     message: 'Enter the intern school:',
@@ -135,6 +135,7 @@ async function startProcess () {
 
 });  //end async function
 
+};
 
 //initiate and run input process
 startProcess();  //asynch await?
@@ -148,6 +149,7 @@ createHTML = () => {
 //Now write it to a file named `team.html` in the use the variable `outputPath` above target this location.
     fs.writeFile(outputPath, render(inputArray))
         .catch((err) => console.error(err));
-    
+    };
+
 
 
