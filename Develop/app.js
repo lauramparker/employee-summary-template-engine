@@ -138,12 +138,13 @@ startProcess();  //asynch await?
 
 render (manager, engineer, intern) = () => {
 
-    fs.readFileSync("templates/main.html")
+    fs.readFileSync("templates/main.html");
 };
 
 //Now write it to a file named `team.html` in the use the variable `outputPath` above target this location.
-    .then((response) => writeFile('output/team.html', render(response)))
+ //   .then((response) => 
 
-    .catch((err) => console.error(err));
+    fs.writeFile('output/team.html', outputPath)
+        .catch((err) => console.error(err));
 
 
