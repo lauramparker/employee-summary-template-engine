@@ -11,11 +11,11 @@ class Intern extends Employee {
 
     getSchool() {
       return this.school;
-    };
+    }
 
     getRole() { 
       return "Intern"; //overriden to return Intern
-    };
-  }
+    }
+}
 
-  module.exports = Intern;
+module.exports = Intern;

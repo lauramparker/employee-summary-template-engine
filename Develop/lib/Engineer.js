@@ -11,10 +11,11 @@ class Engineer extends Employee {
 
     getGithub() {
       return this.github;
-    };
+    }
 
     getRole() {
         return "Engineer"; //overriden to return Engineer
-    };
+    }
+}
 
   module.exports = Engineer;
