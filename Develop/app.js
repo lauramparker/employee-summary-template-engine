@@ -13,6 +13,8 @@ const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
 
+let inputArray = [];
+
 
 //set up number of employees to enter ; set up lop function to got over each employee's info
 async function startProcess () {
@@ -85,6 +87,7 @@ async function startProcess () {
                         const officeNumber = input.officeNumber;
 
                         manager = new Manager(name, id, email, role, officeNumber); //creates manager object
+                        inputArray.push(manager); //pushes single employee data into final employee array
 
                 });
                 break;
@@ -102,6 +105,7 @@ async function startProcess () {
                         const github = input.github;
 
                         engineer = new Manager(name, id, email, role, github); //creates engineer object
+                        inputArray.push(engineer); //pushes single employee data into final employee array
 
                 });
                 break;
@@ -119,6 +123,7 @@ async function startProcess () {
                     const school = input.school;
 
                     intern = new Intern(name, id, email, role, school); //creates intern object
+                    inputArray.push(intern); //pushes single employee data into final employee array
 
                 });
                 break;
@@ -136,15 +141,13 @@ startProcess();  //asynch await?
 
 // After the user has input all employees desired, call the `render` function and pass in an array containing all employee objects;
 
-render (manager, engineer, intern) = () => {
+createHTML = () => {
 
-    fs.readFileSync("templates/main.html");
-};
+    render(inputArray);
 
 //Now write it to a file named `team.html` in the use the variable `outputPath` above target this location.
- //   .then((response) => 
-
-    fs.writeFile('output/team.html', outputPath)
+    fs.writeFile(outputPath, render(inputArray))
         .catch((err) => console.error(err));
+    
 
 
