@@ -69,6 +69,8 @@ await inquirer.prompt([
 
 });  //what happens if nothing is entered?
 
+//NNED SERIES OF IF/THEN's???  OR RESEARCH SWITCH (per class notes...)
+
 //promptManager = () =>
 await inquirer.prompt([
         {
@@ -78,6 +80,8 @@ await inquirer.prompt([
         },
     ]).then((input) => {
         const officeNumber = input.officeNumber;
+
+        const manager = new Manager(name, id, email, role, officeNumber); 
 
 });
 
@@ -92,6 +96,8 @@ await inquirer.prompt([
 ]).then((input) => {
     const github = input.github;
 
+    const engineer = new Manager(name, id, email, role, github); 
+
 });
 
 
@@ -104,6 +110,8 @@ await inquirer.prompt([
     },
 ]).then((input) => {
     const school = input.school;
+
+    const intern = new Intern(name, id, email, role, school); 
 
 });
 
