@@ -15,15 +15,17 @@ const Intern = require("./lib/Intern");
 
 
 //set up number of employees to enter ; set up lop function to got over each employee's info
-startProcess = () =>
-await inquirer.prompt([
+async function startProcess () {
+    console.log("Welcome! Ready to enter your team's Info?");
+
+    inquirer.prompt([
         {
         type: 'number',
-        message: 'How many employees are on this team?',
+        message: 'How many employees are on this team?', //what happens if nothing is entered?
         name: 'teamNumber',
         },
     ]).then((input) => {
-        const teamNumber = input.teamNumber;
+        let teamNumber = input.teamNumber;
 
         for (i = 1; i <teamNumber; i++) {
 
@@ -34,7 +36,7 @@ await inquirer.prompt([
 
 
     //prompt the user to input needed information for employees //inside the startProcess function
-    employeeInput = () =>
+  //  employeeInput = () =>
     await inquirer.prompt([
             {
             type: 'input',
@@ -58,91 +60,101 @@ await inquirer.prompt([
             choices:  ['Manager', 'Engineer', 'Intern']
             },
         ]).then((input) => {
-            const name = input.name; // need to fix this.... not recognizing
-            const id = input.id;
-            const email = input.email
-            const role = input.role;
+            name = input.name; 
+            id = input.id;
+            email = input.email
+            role = input.role;
         });
 
 
-    return employeeInput;
 
-});  //what happens if nothing is entered?
+        //swtich method based on user choice for role type
+        //Use if/thens and function names if switch case doesn't work...
+        switch (role) {
+            case "Manager":
+        
 
-//NNED SERIES OF IF/THEN's???  OR RESEARCH SWITCH (per class notes...)
+                //promptManager = () =>
+                await inquirer.prompt([
+                        {
+                        type: 'number',
+                        message: 'What is the Manager office number?",
+                        name: 'officeNumber',
+                        },
+                    ]).then((input) => {
+                        const officeNumber = input.officeNumber;
 
-//promptManager = () =>
-await inquirer.prompt([
-        {
-        type: 'number',
-        message: 'What is the Manager office number?",
-        name: 'officeNumber',
-        },
-    ]).then((input) => {
-        const officeNumber = input.officeNumber;
+                        manager = new Manager(name, id, email, role, officeNumber); //creates manager object
 
-        const manager = new Manager(name, id, email, role, officeNumber); 
-
-});
-
-
-//promptEngineer = () =>
-await inquirer.prompt([
-    {
-    type: 'url',
-    message: 'What is the github for this emplopyee?',
-    name: 'github',
-    },
-]).then((input) => {
-    const github = input.github;
-
-    const engineer = new Manager(name, id, email, role, github); 
-
-});
+                });
+                break;
 
 
-//promptIntern = () =>
-await inquirer.prompt([
-    {
-    type: 'input',
-    message: 'Enter the intern school:',
-    name: 'school',
-    },
-]).then((input) => {
-    const school = input.school;
+            case "Engineer":
+                //promptEngineer = () =>
+                await inquirer.prompt([
+                        {
+                        type: 'url',
+                        message: 'What is the github for this emplopyee?',
+                        name: 'github',
+                        },
+                    ]).then((input) => {
+                        const github = input.github;
 
-    const intern = new Intern(name, id, email, role, school); 
+                        engineer = new Manager(name, id, email, role, github); //creates engineer object
 
-});
-
-
-
-
+                });
+                break;
 
 
-// and to create objects for each team member (using the correct classes as blueprints!)
+            case "Intern":
+                //promptIntern = () =>
+                await inquirer.prompt([
+                    {
+                    type: 'input',
+                    message: 'Enter the intern school:',
+                    name: 'school',
+                    },
+                ]).then((input) => {
+                    const school = input.school;
 
-//Manager Object
-  
+                    intern = new Intern(name, id, email, role, school); //creates intern object
+
+                });
+                break;
+
+        } //end switch cases
+
+
+    }; //end loop
+
+});  //end async function
+
+
 
 // After the user has input all employees desired, call the `render` function (required
-// above) and pass in an array containing all employee objects; the `render` function will
-// generate and return a block of HTML including templated divs for each employee!
+// above) and pass in an array containing all employee objects;
 
-render 
+render (manager, engineer, intern)
+
+    const mainhtml = fs.readFileSync("templates/main.html");
 
 // After you have your html, you're now ready to create an HTML file using the HTML
 // returned from the `render` function. Now write it to a file named `team.html` in the
 // `output` folder. You can use the variable `outputPath` above target this location.
-// Hint: you may need to check if the `output` folder exists and create it if it
-// does not.
 
-// HINT: each employee type (manager, engineer, or intern) has slightly different0
-// information; write your code to ask different questions via inquirer depending on
-// employee type.
+outputpath = fs.writeFile("output/team.html", teamHTML, function(err) {
 
-// HINT: make sure to build out your classes first! Remember that your Manager, Engineer,
-// and Intern classes should all extend from a class named Employee; see the directions
-// for further information. Be sure to test out each class and verify it generates an
-// object with the correct structure and methods. This structure will be crucial in order
-// for the provided `render` function to work! ```
+        if (err) {
+            return console.logg(err);
+        }
+        console.log("you did it!");
+
+    });
+
+}
+
+
+//initiate and run application
+startProcess();
+
