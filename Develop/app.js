@@ -88,6 +88,8 @@ async function employeeInput () {
                     
                         if(addEmployee === 'Yes') {
                            employeeInput();
+                        } else {
+                            createHTML ();
                         };
                     });
                     break;
@@ -117,6 +119,8 @@ async function employeeInput () {
                     
                             if(addEmployee === 'Yes') {
                                employeeInput();
+                            } else {
+                                createHTML ();
                             };
                     });
                     break;
@@ -146,6 +150,8 @@ async function employeeInput () {
 
                             if(addEmployee === 'Yes') {
                                employeeInput();
+                            } else {
+                                createHTML ();
                             };
                     });
                     break;
