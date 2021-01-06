@@ -6,6 +6,8 @@ const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
+const util = require('util');
+const writeFileAsync = util.promisify(fs.writeFile);
 
 //file sources for employee classes
 const Employee = require("./lib/Employee").default;
@@ -17,19 +19,8 @@ let inputArray = [];
 
 
 //set up number of employees to enter ; set up lop function to got over each employee's info
-async function startProcess () {
-    console.log("Welcome!");
-
-    //inquirer.prompt([
-    //     {
-    //     type: 'number',
-    //     message: 'How many employees are on this team?', //what happens if nothing is entered?
-    //     name: 'teamNumber',
-    //     },
-    // ]).then((input) => {
-    //     let teamNumber = input.teamNumber;
-
-    //    for (i = 1; i < teamNumber; i++) {
+async function employeeInput () {
+    console.log("Get ready to enter employee data.");
             let name;
             let id;
             let email;
@@ -37,7 +28,7 @@ async function startProcess () {
                
 
     //prompt the user to input needed information for employees //inside the startProcess function
-//   employeeInput = () =>
+
   await inquirer.prompt([
     
             {
@@ -64,10 +55,9 @@ async function startProcess () {
         ]).then((input) => {
             name = input.name; 
             id = input.id;
-            email = input.email
+            email = input.email;
             role = input.role;
         });
-
 
 
         //switch method based on user choice for role type
@@ -87,7 +77,11 @@ async function startProcess () {
                         manager = new Manager(name, id, email, role, officeNumber); //creates manager object
                         inputArray.push(manager); //pushes single employee data into final employee array
 
-
+                        var addEmployee = input.addEmployee;
+                    
+                        if(addEmployee === 'Yes') {
+                           employeeInput();
+                        };
                 });
                 break;
 
@@ -105,6 +99,11 @@ async function startProcess () {
                         engineer = new Manager(name, id, email, role, github); //creates engineer object
                         inputArray.push(engineer); //pushes single employee data into final employee array
 
+                        var addEmployee = input.addEmployee;
+                    
+                            if(addEmployee === 'Yes') {
+                               employeeInput();
+                            };
                 });
                 break;
 
@@ -116,47 +115,60 @@ async function startProcess () {
                     message: 'Enter the intern school:',
                     name: 'school',
                     },
-                ]).then((input) => {
+                    {
+                    type: 'list',
+                    message: 'Do you want to add an employee?',
+                    name: 'addEmployee',
+                    choices: ['Yes', 'No'],
+                    }
+                ])
+                .then((input) => {
                     let school = input.school;
 
                     intern = new Intern(name, id, email, role, school); //creates intern object
                     inputArray.push(intern); //pushes single employee data into final employee array
 
+                    var addEmployee = input.addEmployee;
+
+                            if(addEmployee === 'Yes') {
+                               employeeInput();
+                            };
                 });
                 break;
 
         } //end switch cases
 
-        inquirer.prompt([
-        {
-            type: 'list',
-            message: 'Do you want to add an employee?',
-            name: 'addEmployee',
-            choices: ['Yes', 'No'],
-            }
-        ]).then(function(answer) {
-            if(answer.addEmployee === 'Yes') {
-                startProcess();
-            }
-        })
+//};  //end async startProcess function
 
-//    }; //end loop
+//async function addEmployee () {
+    // await inquirer.prompt([
+    //     {
+    //         type: 'list',
+    //         message: 'Do you want to add an employee?',
+    //         name: 'addEmployee',
+    //         choices: ['Yes', 'No'],
+    //         }
+    //     ]).then(function() {
+    //         if(addEmployee === 'Yes') {
+    //             employeeInput();
+    //         }
+    //     })
 
-};  //end async function
+}; //end addEmployee
 
 
 
 //initiate and run input process
-startProcess();  //asynch await?
+employeeInput();
 
 // After the user has input all employees desired, call the `render` function and pass in an array containing all employee objects;
 
 createHTML = () => {
 
-    render(inputArray);
+    const display = render(inputArray);
 
 //Now write it to a file named `team.html` in the use the variable `outputPath` above target this location.
-    fs.writeFile(outputPath, render(inputArray))
+    writeFileAsync(outputPath, display)
         .catch((err) => console.error(err));
     };
 
