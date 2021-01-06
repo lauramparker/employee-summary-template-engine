@@ -71,19 +71,26 @@ async function employeeInput () {
                         message: 'What is the Manager office number?',
                         name: 'officeNumber',
                         },
-                    ]).then((input) => {
+                        {
+                        type: 'list',
+                        message: 'Do you want to add an employee?',
+                        name: 'addEmployee',
+                        choices: ['Yes', 'No'],
+                        }
+                    ])
+                    .then((input) => {
                         const officeNumber = input.officeNumber;
 
                         manager = new Manager(name, id, email, role, officeNumber); //creates manager object
                         inputArray.push(manager); //pushes single employee data into final employee array
 
-                        var addEmployee = input.addEmployee;
+                        let addEmployee = input.addEmployee;
                     
                         if(addEmployee === 'Yes') {
                            employeeInput();
                         };
-                });
-                break;
+                    });
+                    break;
 
 
             case "Engineer":
@@ -93,73 +100,61 @@ async function employeeInput () {
                         message: 'What is the github for this emplopyee?',
                         name: 'github',
                         },
-                    ]).then((input) => {
+                        {
+                        type: 'list',
+                        message: 'Do you want to add an employee?',
+                        name: 'addEmployee',
+                        choices: ['Yes', 'No'],
+                        }
+                    ])
+                    .then((input) => {
                         let github = input.github;
 
                         engineer = new Manager(name, id, email, role, github); //creates engineer object
                         inputArray.push(engineer); //pushes single employee data into final employee array
 
-                        var addEmployee = input.addEmployee;
+                        let addEmployee = input.addEmployee;
                     
                             if(addEmployee === 'Yes') {
                                employeeInput();
                             };
-                });
-                break;
+                    });
+                    break;
 
 
             case "Intern":
-                 inquirer.prompt([
-                    {
-                    type: 'input',
-                    message: 'Enter the intern school:',
-                    name: 'school',
-                    },
-                    {
-                    type: 'list',
-                    message: 'Do you want to add an employee?',
-                    name: 'addEmployee',
-                    choices: ['Yes', 'No'],
-                    }
-                ])
-                .then((input) => {
-                    let school = input.school;
+                    inquirer.prompt([
+                        {
+                        type: 'input',
+                        message: 'Enter the intern school:',
+                        name: 'school',
+                        },
+                        {
+                        type: 'list',
+                        message: 'Do you want to add an employee?',
+                        name: 'addEmployee',
+                        choices: ['Yes', 'No'],
+                        }
+                    ])
+                    .then((input) => {
+                        let school = input.school;
 
-                    intern = new Intern(name, id, email, role, school); //creates intern object
-                    inputArray.push(intern); //pushes single employee data into final employee array
+                        intern = new Intern(name, id, email, role, school); //creates intern object
+                        inputArray.push(intern); //pushes single employee data into final employee array
 
-                    var addEmployee = input.addEmployee;
+                        let addEmployee = input.addEmployee;
 
                             if(addEmployee === 'Yes') {
                                employeeInput();
                             };
-                });
-                break;
+                    });
+                    break;
 
         } //end switch cases
 
-//};  //end async startProcess function
 
-//async function addEmployee () {
-    // await inquirer.prompt([
-    //     {
-    //         type: 'list',
-    //         message: 'Do you want to add an employee?',
-    //         name: 'addEmployee',
-    //         choices: ['Yes', 'No'],
-    //         }
-    //     ]).then(function() {
-    //         if(addEmployee === 'Yes') {
-    //             employeeInput();
-    //         }
-    //     })
+}; //end employeeInput
 
-}; //end addEmployee
-
-
-
-//initiate and run input process
-employeeInput();
 
 // After the user has input all employees desired, call the `render` function and pass in an array containing all employee objects;
 
@@ -173,4 +168,7 @@ createHTML = () => {
     };
 
 
+//ACTIONS   
+//initiate and run input process
+employeeInput();
 
