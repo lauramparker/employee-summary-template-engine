@@ -99,7 +99,7 @@ async function employeeInput () {
                  inquirer.prompt([
                         {
                         type: 'url',
-                        message: 'What is the github for this emplopyee?',
+                        message: 'What is the github for this employee?',
                         name: 'github',
                         },
                         {
