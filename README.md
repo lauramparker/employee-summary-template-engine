@@ -1,5 +1,5 @@
 # Template-Engine---Employee-Summary
-_A NOdejs CLI application_
+_A Nodejs CLI application_
 
 ## Description
 >This project delivers an application that generates a stylized layout of personnel information based on the user's input.  The intent of the application is to simplify the process for creating a directory of employee information.  The employee roles included in the application are Manager, Engineer, and Intern; therefor, the app is best for recording IT department staff, a project team, intern group, or management team.  The application uses the command line functions (via node.js) to prompt the user for input fields and then write the final information to an html file for display.  The site utilizes Bootstrap components to create the CSS display.  When the application runs, the user is prompted to enter the following information for each staff member:
